@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Admin Dashboard</div>
+</nav>
+
+<section class="admin-container">
+
+    <!-- FORM SECTION -->
+    <div class="admin-form">
+        <h2 id="formTitle">Add Menu Item</h2>
+
+        <form id="menuForm">
+            <input type="text" id="name" placeholder="Item Name" required>
+            <input type="number" id="price" placeholder="Price" required>
+
+            <select id="category" required>
+                <option value="">Select Category</option>
+                <option value="food">Food</option>
+                <option value="drinks">Drinks</option>
+                <option value="coffee">Coffee</option>
+            </select>
+
+            <input type="text" id="image" placeholder="Image Path (images/xxx.jpg)" required>
+
+            <button type="submit" id="submitBtn">Add Item</button>
+        </form>
+    </div>
+
+    <!-- LIST SECTION -->
+    <div class="admin-list">
+        <h2>Menu Items</h2>
+        <div id="adminList"></div>
+    </div>
+
+</section>
+
+<!-- DELETE CONFIRMATION MODAL -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <h3>Delete Menu Item</h3>
+        <p>
+            Are you sure you want to delete this item?
+            <br><br>
+            <strong>This action cannot be undone.</strong>
+        </p>
+
+        <div class="modal-buttons">
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <button class="confirm-delete-btn" onclick="confirmDelete()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

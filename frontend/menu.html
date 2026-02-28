@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Café Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">University Café</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+        </ul>
+
+        <div class="menu-toggle">&#9776;</div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Our Menu</h1>
+        <p>Check out our food and drinks with prices</p>
+    </section>
+
+    <!-- Category Filter Buttons -->
+    <section class="category-buttons">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="food">Food</button>
+        <button class="filter-btn" data-category="drinks">Drinks</button>
+        <button class="filter-btn" data-category="coffee">Coffee</button>
+    </section>
+
+    <!-- Menu Cards -->
+    <section class="menu-container">
+
+        <!-- <div class="food-card" data-category="food">
+            <div class="image-box">
+                <img src="images/burger 1.jpg" alt="Burger">
+            </div>
+            <div class="food-info">
+                <h3>Burger</h3>
+                <p class="price">120 Birr</p>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="drinks">
+            <div class="image-box">
+                <img src="images/juice 1.jpg" alt="Fresh Juice">
+            </div>
+            <div class="food-info">
+                <h3>Fresh Juice</h3>
+                <p class="price">80 Birr</p>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="food">
+            <div class="image-box">
+                <img src="images/pizza 1.jpg" alt="Pizza">
+            </div>
+            <div class="food-info">
+                <h3>Pizza</h3>
+                <p class="price">200 Birr</p>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="coffee">
+            <div class="image-box">
+                <img src="images/coffee 1.jpg" alt="Coffee">
+            </div>
+            <div class="food-info">
+                <h3>Coffee</h3>
+                <p class="price">50 Birr</p>
+            </div>
+        </div> -->
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 University Café - Ethiopia</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- JavaScript for filter -->
+    <!-- <script>
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links')
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const foodCards = document.querySelectorAll('.food-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const category = button.dataset.category;
+
+                foodCards.forEach(card => {
+                    if(category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+    </script> -->
+
+</body>
+</html>
