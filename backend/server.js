@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./db'); // Looks in the same folder
-const menuRoutes = require('../routes/menuRoutes'); // Goes UP one folder then into ROUTER
+const menuRoutes = require('./routes/menuRoutes'); // Goes UP one folder then into ROUTER
 
 const app = express();
 
