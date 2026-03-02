@@ -1,33 +1,42 @@
+// 1. SET THE API URL
+// When you host on Render, replace 'http://localhost:5000' with your Render link
+const API_URL = 'http://localhost:5000/api/menu';
+
 let editMode = false;
 let editId = null;
 
 async function loadMenu() {
-    const response = await fetch('http://localhost:5000/api/menu');
-    const items = await response.json();
+    try {
+        const response = await fetch(API_URL);
+        const items = await response.json();
 
-    const container = document.getElementById('adminList');
-    container.innerHTML = '';
+        const container = document.getElementById('adminList');
+        container.innerHTML = '';
 
-    items.forEach(item => {
-        container.innerHTML += `
-            <div class="admin-item">
-                <div>
-                    <strong>${item.name}</strong><br>
-                    ${item.price} Birr - ${item.category}
+        items.forEach(item => {
+            // IMPORTANT: MongoDB uses item._id instead of item.id
+            container.innerHTML += `
+                <div class="admin-item">
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        ${item.price} Birr - ${item.category}
+                    </div>
+                    <div class="admin-buttons">
+                        <button class="edit-btn" onclick="startEdit('${item._id}', '${item.name}', ${item.price}, '${item.category}', '${item.image}')">Edit</button>
+                        <button class="delete-btn" onclick="deleteItem('${item._id}')">Delete</button>
+                    </div>
                 </div>
-                <div class="admin-buttons">
-                    <button class="edit-btn" onclick="startEdit(${item.id}, '${item.name}', ${item.price}, '${item.category}', '${item.image}')">Edit</button>
-                    <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
-                </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    } catch (error) {
+        console.error("Error loading menu:", error);
+    }
 }
 
 let deleteId = null;
 
 function deleteItem(id) {
-    deleteId = id;
+    deleteId = id; // This is now the MongoDB _id string
     document.getElementById('deleteModal').style.display = 'flex';
 }
 
@@ -39,12 +48,12 @@ function closeModal() {
 async function confirmDelete() {
     if (!deleteId) return;
 
-    await fetch(`http://localhost:5000/api/menu/${deleteId}`, {
+    await fetch(`${API_URL}/${deleteId}`, {
         method: 'DELETE'
     });
 
     closeModal();
-    loadMenu(); // Smooth reload without page refresh
+    loadMenu(); 
 }
 
 function startEdit(id, name, price, category, image) {
@@ -71,7 +80,8 @@ document.getElementById('menuForm').addEventListener('submit', async function(e)
     };
 
     if (editMode) {
-        await fetch(`http://localhost:5000/api/menu/${editId}`, {
+        // Update existing item using editId (_id)
+        await fetch(`${API_URL}/${editId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -84,7 +94,8 @@ document.getElementById('menuForm').addEventListener('submit', async function(e)
         document.getElementById('submitBtn').innerText = "Add Item";
 
     } else {
-        await fetch('http://localhost:5000/api/menu', {
+        // Add new item
+        await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

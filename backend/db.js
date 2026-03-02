@@ -1,19 +1,15 @@
-const sql = require('mssql');
+const mongoose = require('mongoose');
+require('dotenv').config(); // This line reads your .env file
 
-const config = {
-    user: 'Professor_cafe',
-    password: 'professor_cafe',
-    server: 'localhost',
-    database: 'Professor_cafe',
-    options: {
-        encrypt: false,
-        trustServerCertificate:true
+const connectDB = async () => {
+    try {
+        // We use process.env to pull the secret link safely
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("🚀 MongoDB Connected from .env variables!");
+    } catch (err) {
+        console.error("❌ Connection error:", err.message);
+        process.exit(1);
     }
 };
 
-const pool = new sql.ConnectionPool(config);
-const poolConnect = pool.connect();
-
-module.exports = {
-    sql, pool, poolConnect
-};
+module.exports = connectDB;
